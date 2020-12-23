@@ -1,0 +1,4 @@
+[submodule "henrik/libs/open_spiel"]
+	path = henrik/libs/open_spiel
+	url = https://github.com/semanticweights/open_spiel.git
+	branch = henrik
