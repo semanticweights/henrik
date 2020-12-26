@@ -4,7 +4,8 @@ project(henrik)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED)
 
-set(LINK_LIBS
+# build open_spiel
+set(OPEN_SPIEL_LIBRARIES
   open_spiel_core
   games
   game_transforms
@@ -12,9 +13,15 @@ set(LINK_LIBS
   algorithms
   utils
 )
-
-include_directories(${CMAKE_SOURCE_DIR} libs/open_spiel)
 add_subdirectory(libs/open_spiel/open_spiel)
 
+# find mlpack
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+find_package(MLPACK REQUIRED)
+
+# add all include directories
+include_directories(${CMAKE_SOURCE_DIR} libs/open_spiel ${MLPACK_INCLUDE_DIRS})
+
+# build the executables
 add_executable(abstraction src/abstraction.cpp)
-target_link_libraries(abstraction ${LINK_LIBS})
+target_link_libraries(abstraction ${OPEN_SPIEL_LIBRARIES} ${MLPACK_LIBRARIES})
