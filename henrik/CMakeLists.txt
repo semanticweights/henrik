@@ -16,6 +16,7 @@ set(OPEN_SPIEL_LIBRARIES
 add_subdirectory(libs/open_spiel/open_spiel)
 
 # find mlpack
+add_compile_definitions(ARMA_DONT_USE_HDF5)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 find_package(MLPACK REQUIRED)
 
